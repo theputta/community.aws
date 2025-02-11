@@ -97,6 +97,20 @@ EXAMPLES = r"""
     source_snapshot_id: snap-xxxxxxx
     encrypted: true
     kms_key_id: arn:aws:kms:eu-central-1:XXXXXXXXXXXX:key/746de6ea-50a4-4bcb-8fbc-e3b29f2d367b
+
+- name: Copy snapshot using custom endpoint
+  community.aws.ec2_snapshot_copy:
+    source_region: us-east-1
+    region: us-west-2
+    source_snapshot_id: snap-0123456789abcdef0
+    endpoint_url: "https://vpc-endpoint.ec2.region.amazonaws.com"
+    description: "Cross-region copy via VPC endpoint"
+    encrypted: true
+    wait: true
+    wait_timeout: 900
+    tags:
+      Name: "copied-snapshot"
+      Environment: "production"    
 """
 
 RETURN = r"""
